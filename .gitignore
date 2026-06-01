@@ -1,0 +1,32 @@
+# Never commit secrets or machine-local state
+*.local
+.zshrc.local
+.bashrc.local
+
+# Secrets / credentials (safety net — stow targets ~ and ~/.config)
+id_*
+*.pem
+*.key
+hosts.yml
+.credentials.json
+auth.json
+config.json
+*token*
+*secret*
+
+# Shell history
+.zsh_history
+.bash_history
+.*history
+*history.jsonl
+
+# Caches / state
+.cache/
+*.sqlite
+
+# Neovim local artifacts
+config/nvim/tags
+config/nvim/.luarc.json
+
+# OS cruft
+.DS_Store

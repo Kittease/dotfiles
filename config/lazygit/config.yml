@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
+# Git
+git:
+  autoFetch: false
+
+# UI
+gui:
+  showCommandLog: false
+  showBottomLine: false
+
+# Keybindings
+keybinding:
+  universal:
+    copyToClipboard: <c-u>
+  commitMessage:
+    commitMenu: <c-u>
+
