@@ -4,10 +4,10 @@ keybinds clear-defaults=true {
     normal {
     }
     locked {
-        bind "Super g" { SwitchToMode "normal"; }
+        bind "__MOD__g" { SwitchToMode "normal"; }
     }
     resize {
-        bind "Super n" { SwitchToMode "normal"; }
+        bind "__MOD__n" { SwitchToMode "normal"; }
         bind "h" "left" { Resize "Increase left"; }
         bind "j" "down" { Resize "Increase down"; }
         bind "k" "up" { Resize "Increase up"; }
@@ -20,7 +20,7 @@ keybinds clear-defaults=true {
         bind "-" { Resize "Decrease"; }
     }
     pane {
-        bind "Super p" { SwitchToMode "normal"; }
+        bind "__MOD__p" { SwitchToMode "normal"; }
         bind "h" "left" { MoveFocus "left"; }
         bind "l" "right" { MoveFocus "right"; }
         bind "j" "down" { MoveFocus "down"; }
@@ -39,7 +39,7 @@ keybinds clear-defaults=true {
         bind "i" { TogglePanePinned; SwitchToMode "normal"; }
     }
     move {
-        bind "Super m" { SwitchToMode "normal"; }
+        bind "__MOD__m" { SwitchToMode "normal"; }
         bind "n" "tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "h" "left" { MovePane "left"; }
@@ -48,7 +48,7 @@ keybinds clear-defaults=true {
         bind "l" "right" { MovePane "right"; }
     }
     tab {
-        bind "Super t" { SwitchToMode "normal"; }
+        bind "__MOD__t" { SwitchToMode "normal"; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         bind "h" "left" "up" "k" { GoToPreviousTab; }
         bind "l" "right" "down" "j"  { GoToNextTab; }
@@ -73,7 +73,7 @@ keybinds clear-defaults=true {
         bind "i" { MoveTab "right"; }
     }
     scroll {
-        bind "Super f" { SwitchToMode "normal"; }
+        bind "__MOD__f" { SwitchToMode "normal"; }
         bind "e" { EditScrollback; SwitchToMode "normal"; }
         bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
     }
@@ -85,7 +85,7 @@ keybinds clear-defaults=true {
         bind "o" { SearchToggleOption "WholeWord"; }
     }
     shared_among "scroll" "search" {
-        bind "Super c" { ScrollToBottom; SwitchToMode "normal"; }
+        bind "__MOD__c" { ScrollToBottom; SwitchToMode "normal"; }
         bind "j" "down" { ScrollDown; }
         bind "k" "up" { ScrollUp; }
         bind "PageUp" "left" "h" { PageScrollUp; }
@@ -94,7 +94,7 @@ keybinds clear-defaults=true {
         bind "d" { HalfPageScrollDown; }
     }
     entersearch {
-        bind "Super c" "esc" { SwitchToMode "scroll"; }
+        bind "__MOD__c" "esc" { SwitchToMode "scroll"; }
         bind "enter" { SwitchToMode "search"; }
     }
     renametab {
@@ -104,10 +104,10 @@ keybinds clear-defaults=true {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
     shared_among "renametab" "renamepane" {
-        bind "Super c" { SwitchToMode "normal"; }
+        bind "__MOD__c" { SwitchToMode "normal"; }
     }
     session {
-        bind "Super o" { SwitchToMode "normal"; }
+        bind "__MOD__o" { SwitchToMode "normal"; }
         bind "d" { Detach; }
         bind "w" {
             LaunchOrFocusPlugin "session-manager" {
@@ -139,7 +139,7 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Super g" { SwitchToMode "locked"; }
+        bind "__MOD__g" { SwitchToMode "locked"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
     }
@@ -163,22 +163,22 @@ keybinds clear-defaults=true {
 
     }
     shared_except "pane" "locked" {
-        bind "Super p" { SwitchToMode "pane"; }
+        bind "__MOD__p" { SwitchToMode "pane"; }
     }
     shared_except "resize" "locked" {
-        bind "Super n" { SwitchToMode "resize"; }
+        bind "__MOD__n" { SwitchToMode "resize"; }
     }
     shared_except "scroll" "locked" {
-        bind "Super f" { SwitchToMode "scroll"; }
+        bind "__MOD__f" { SwitchToMode "scroll"; }
     }
     shared_except "session" "locked" {
-        bind "Super o" { SwitchToMode "session"; }
+        bind "__MOD__o" { SwitchToMode "session"; }
     }
     shared_except "tab" "locked" {
-        bind "Super t" { SwitchToMode "tab"; }
+        bind "__MOD__t" { SwitchToMode "tab"; }
     }
     shared_except "move" "locked" {
-        bind "Super m" { SwitchToMode "move"; }
+        bind "__MOD__m" { SwitchToMode "move"; }
     }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
@@ -214,7 +214,7 @@ load_plugins {
     // "https://example.com/my-plugin.wasm"
 }
 
-// env block not needed on macOS (PATH managed by shell profile)
+__ENV_BLOCK__
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
@@ -235,7 +235,7 @@ load_plugins {
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-default_shell "/bin/zsh"
+default_shell "__ZSH__"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
@@ -371,7 +371,7 @@ scroll_buffer_size 100000
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-scrollback_editor "/opt/homebrew/bin/nvim"
+scrollback_editor "__NVIM__"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

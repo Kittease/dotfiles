@@ -30,7 +30,17 @@ return {
 				},
 			},
 			pickers = {
-				find_files = {
+				live_grep = {
+					layout_strategy = "vertical",
+					layout_config = { mirror = true, preview_height = 0.5, preview_cutoff = 0 },
+				},
+				grep_string = {
+					layout_strategy = "vertical",
+					layout_config = { mirror = true, preview_height = 0.5, preview_cutoff = 0 },
+				},
+			find_files = {
+					layout_strategy = "vertical",
+					layout_config = { mirror = true, preview_height = 0.5, preview_cutoff = 0 },
 					hidden = true,
 					no_ignore = true,
 					find_command = {
@@ -61,7 +71,6 @@ return {
 		vim.keymap.set({ "n", "v" }, "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[S]earch [C]ommands" })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })

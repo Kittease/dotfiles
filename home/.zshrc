@@ -17,7 +17,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 zellij-clear() { zellij action clear; zle reset-prompt; }
 zle -N zellij-clear
-bindkey '^K' zellij-clear
+if [[ "$OSTYPE" == darwin* ]]; then
+  bindkey '\ek' zellij-clear  # Cmd+K → ESC+k via Ghostty keybind
+else
+  bindkey '^K' zellij-clear   # Ctrl+K on Linux
+fi
 
 eval "$(zoxide init zsh)"
 

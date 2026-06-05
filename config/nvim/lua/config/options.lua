@@ -1,3 +1,13 @@
+-- Add nvm-managed node to PATH so LSP servers can find it when Neovim is
+-- launched outside a full login shell (e.g. from a GUI or without nvm init).
+if vim.fn.executable("node") == 0 then
+	local matches = vim.fn.glob(vim.fn.expand("~/.nvm/versions/node/*/bin"), false, true)
+	if #matches > 0 then
+		table.sort(matches, function(a, b) return a > b end)
+		vim.env.PATH = matches[1] .. ":" .. vim.env.PATH
+	end
+end
+
 vim.o.number = true
 vim.o.relativenumber = true
 

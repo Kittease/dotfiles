@@ -69,5 +69,33 @@ backup_conflicts config "$HOME/.config"
 stow --target="$HOME"         --restow home
 stow --target="$HOME/.config" --restow config
 
+# 5. Generate zellij config from template (OS-specific paths) ----------------
+info "Generating zellij config..."
+ZSH_BIN="$(command -v zsh)"
+NVIM_BIN="$(command -v nvim 2>/dev/null || echo "/usr/bin/nvim")"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  ENV_BLOCK="// env block not needed on macOS (PATH managed by shell profile)"
+  MOD="Super "
+else
+  ENV_BLOCK="env {
+    PATH \"$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin\"
+}"
+  MOD="Ctrl "
+fi
+
+mkdir -p "$HOME/.config/zellij"
+[[ -L "$HOME/.config/zellij/config.kdl" ]] && rm "$HOME/.config/zellij/config.kdl"
+
+python3 - <<PYEOF
+import os
+tmpl = open("$DOTFILES_DIR/config/zellij/config.kdl.tmpl").read()
+out = tmpl.replace("__ZSH__", "$ZSH_BIN") \
+          .replace("__NVIM__", "$NVIM_BIN") \
+          .replace("__ENV_BLOCK__", """$ENV_BLOCK""") \
+          .replace("__MOD__", "$MOD")
+open(os.path.expanduser("~/.config/zellij/config.kdl"), "w").write(out)
+PYEOF
+
 info "Done. Restart your shell (or 'exec zsh') to load the new config."
 echo "Remaining manual steps are in the README (secrets, AI CLI auth, GUI apps)."

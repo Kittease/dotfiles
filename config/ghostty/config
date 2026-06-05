@@ -1,1 +1,6 @@
 window-decoration=none
+macos-option-as-alt = true
+font-size = 18
+keybind = cmd+t=unbind
+keybind = cmd+w=unbind
+keybind = cmd+k=text:\x1bk
